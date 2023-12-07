@@ -1,11 +1,9 @@
-import Post from './components/Post';
+import PostsList from './components/PostsList';
 
-function App() {
+export default function App() {
 	return (
 		<main>
-			<Post author='Max' body='bla bla' />
+			<PostsList />
 		</main>
 	);
 }
-
-export default App;
