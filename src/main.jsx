@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './routes/RootLayout';
-import Posts from './routes/Posts';
+import Posts, { loader as postsLoader } from './routes/Posts';
 import NewPost from './routes/NewPost';
 
 import './index.css';
@@ -15,7 +15,8 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Posts />,
+				element: <Posts />, // element rendering starts only when loader task is completed.
+				loader: postsLoader,
 				children: [{ path: '/create-post', element: <NewPost /> }],
 			},
 		],
