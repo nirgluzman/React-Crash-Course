@@ -20,7 +20,7 @@ https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary-u
 
 
 My github repo:
-git@github.com:nirgluzman/React-Crash-Course.git
+git@github.com:nirgluzman/React-ReactRouter-GetStarted.git
 
 
 React with Vite
