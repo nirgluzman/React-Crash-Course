@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import Modal from './Modal';
-import NewPost from './NewPost';
 import Post from './Post';
-
 import classes from './PostsList.module.css';
 
-export default function PostsList({ isPosting, onStopPosting }) {
+export default function PostsList() {
 	const [posts, setPosts] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 
@@ -29,8 +26,8 @@ export default function PostsList({ isPosting, onStopPosting }) {
 			const response = await fetch('http://localhost:8080/posts', {
 				method: 'GET',
 			});
-			const data = await response.json();
-			setPosts(data.posts);
+			const resData = await response.json();
+			setPosts(resData.posts);
 			setIsFetching(false);
 		}
 		fetchPosts();
@@ -38,11 +35,6 @@ export default function PostsList({ isPosting, onStopPosting }) {
 
 	return (
 		<>
-			{isPosting && (
-				<Modal onClose={onStopPosting}>
-					<NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-				</Modal>
-			)}
 			{!isFetching && posts.length > 0 && (
 				<ul className={classes.posts}>
 					{posts.map((post, index) => (
