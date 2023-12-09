@@ -40,5 +40,8 @@ export async function action({ request }) {
 		body: JSON.stringify(postData),
 	});
 
+	// 'redirect' takes a path as an argument and immediately redirects the user to that path.
+	// It's recommended to use 'redirect' in loaders and actions rather than 'useNavigate'.
+	// https://reactrouter.com/en/main/fetch/redirect
 	return redirect('/');
 }
