@@ -27,6 +27,10 @@ React with Vite
 https://vitejs.dev/guide/
 
 
+React Router for "client side routing"
+https://reactrouter.com/en/main/start/overview
+
+
 *** CSS Modules Stylesheet ***
 CSS files in which all class names and animation names are scoped locally by default.
 I.e., the CSS inside a module is available only for the component that imported it, and you do not have to worry about name conflicts.
