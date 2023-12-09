@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Modal from './Modal';
 import NewPost from './NewPost';
@@ -20,6 +20,18 @@ export default function PostsList({ isPosting, onStopPosting }) {
 
 		setPosts(exisitingPosts => [postData, ...exisitingPosts]);
 	}
+
+	// fetching all posts after the initial render of the component and not on any subsequent renders.
+	useEffect(() => {
+		async function fetchPosts() {
+			const response = await fetch('http://localhost:8080/posts', {
+				method: 'GET',
+			});
+			const data = await response.json();
+			setPosts(data.posts);
+		}
+		fetchPosts();
+	}, []);
 
 	return (
 		<>
