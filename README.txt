@@ -1,5 +1,19 @@
+Get started with React.js & React Router 6+
+https://www.youtube.com/@academind
+https://www.youtube.com/watch?v=4baq00tHfmA (video)
+
+
+Course github repo:
+git@github.com:academind/react-complete-guide-code.git
+
+
 Starting project:
-https://github.com/academind/react-complete-guide-code/tree/zz-reactjs-summary-updated/extra-files/starting-project
+https://github.com/academind/react-complete-guide-code/blob/zz-reactjs-summary-updated/extra-files/starting-project.zip
+
+
+My github repo:
+git@github.com:nirgluzman/React-Crash-Course.git
+
 
 React with Vite
 https://vitejs.dev/guide/

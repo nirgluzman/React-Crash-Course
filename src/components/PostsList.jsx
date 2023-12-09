@@ -1,43 +1,30 @@
 import { useState } from 'react';
 
-import Post from './Post';
-import NewPost from './NewPost';
 import Modal from './Modal';
+import NewPost from './NewPost';
+import Post from './Post';
 
 import classes from './PostsList.module.css';
-import { set } from 'mongoose';
 
-export default function PostsList() {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
+export default function PostsList({ isPosting, onStopPosting }) {
+	const [posts, setPosts] = useState([]);
 
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
+	function addPostHandler(postData) {
+		setPosts(exisitingPosts => [postData, ...exisitingPosts]);
+	}
 
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-
-  function authorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-
-  return (
-    <>
-      {modalIsVisible && (
-        <Modal onClose={hideModalHandler}>
-          <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
-          />
-        </Modal>
-      )}
-      <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
-        <Post author='Idan' body='bla bla' />
-      </ul>
-    </>
-  );
+	return (
+		<>
+			{isPosting && (
+				<Modal onClose={onStopPosting}>
+					<NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+				</Modal>
+			)}
+			<ul className={classes.posts}>
+				{posts.map(post => (
+					<Post author={post.author} body={post.body} />
+				))}
+			</ul>
+		</>
+	);
 }
