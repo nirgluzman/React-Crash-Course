@@ -9,6 +9,7 @@ import PostDetails, { loader as postDetailsLoader } from './routes/PostDetails';
 
 import './index.css';
 
+// https://reactrouter.com/en/main/routers/create-browser-router
 const router = createBrowserRouter([
 	{
 		path: '/',

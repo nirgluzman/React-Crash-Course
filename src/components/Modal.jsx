@@ -12,6 +12,10 @@ export default function Modal({ children }) {
 	return (
 		<>
 			<div className={classes.backdrop} onClick={closeHandler} />
+
+			{/* <dialog> tag is used to define a dialog box or subwindow.
+			Modal dialogs are interactive windows that overlay the rest of the web page,
+			preventing users from interacting with the main content until they close the dialog */}
 			<dialog open className={classes.modal}>
 				{children}
 			</dialog>
