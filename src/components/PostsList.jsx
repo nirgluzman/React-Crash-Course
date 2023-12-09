@@ -6,18 +6,6 @@ import classes from './PostsList.module.css';
 export default function PostsList() {
 	const posts = useLoaderData(); //  hook to provide the value returned from the route loader.
 
-	function addPostHandler(postData) {
-		fetch('http://localhost:8080/posts', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(postData),
-		});
-
-		setPosts(exisitingPosts => [postData, ...exisitingPosts]);
-	}
-
 	return (
 		<>
 			{posts.length > 0 && (

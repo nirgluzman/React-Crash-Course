@@ -1,44 +1,19 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Form, redirect } from 'react-router-dom';
 
 import Modal from '../components/Modal';
 import classes from './NewPost.module.css';
 
-export default function NewPost({ onAddPost }) {
-	const [enteredBody, setEnteredBody] = useState('');
-	const [enteredAuthor, setEnteredAuthor] = useState('');
-
-	function bodyChangeHandler(event) {
-		setEnteredBody(event.target.value);
-	}
-
-	function authorChangeHandler(event) {
-		setEnteredAuthor(event.target.value);
-	}
-
-	function submitHandler(event) {
-		event.preventDefault(); // disable browser default behaviour to send an HTTP request on submit.
-
-		const postData = {
-			body: enteredBody,
-			author: enteredAuthor,
-		};
-		console.log(postData);
-
-		onAddPost(postData);
-		onCancel();
-	}
-
+export default function NewPost() {
 	return (
 		<Modal>
-			<form className={classes.form} onSubmit={submitHandler}>
+			<Form className={classes.form} method='post'>
 				<p>
 					<label htmlFor='body'>Text</label>
-					<textarea id='body' required rows={3} onChange={bodyChangeHandler} />
+					<textarea id='body' name='body' required rows={3} />
 				</p>
 				<p>
 					<label htmlFor='name'>Your name</label>
-					<input type='text' id='name' required onChange={authorChangeHandler} />
+					<input type='text' id='name' name='author' required />
 				</p>
 				<p className={classes.actions}>
 					<Link to='/' type='button'>
@@ -46,7 +21,24 @@ export default function NewPost({ onAddPost }) {
 					</Link>
 					<button type='submit'>Submit</button>
 				</p>
-			</form>
+			</Form>
 		</Modal>
 	);
+}
+
+// on submition, React Router sends the encoded data in Form to 'action'.
+export async function action({ request }) {
+	const formData = await request.formData();
+	const postData = Object.fromEntries(formData); // {body: '...', author: '...'}
+	console.log(postData);
+
+	await fetch('http://localhost:8080/posts', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(postData),
+	});
+
+	return redirect('/');
 }
