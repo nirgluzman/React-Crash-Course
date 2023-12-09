@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RootLayout from './routes/RootLayout';
 import Posts, { loader as postsLoader } from './routes/Posts';
 import NewPost, { action as newPostAction } from './routes/NewPost';
+import PostDetails, { loader as postDetailsLoader } from './routes/PostDetails';
 
 import './index.css';
 
@@ -15,9 +16,12 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Posts />, // element rendering starts only when loader task is completed.
-				loader: postsLoader,
-				children: [{ path: '/create-post', element: <NewPost />, action: newPostAction }],
+				element: <Posts />,
+				loader: postsLoader, // "loader" function to provide data to the route element before it renders.
+				children: [
+					{ path: '/create-post', element: <NewPost />, action: newPostAction },
+					{ path: '/:postId', element: <PostDetails />, loader: postDetailsLoader },
+				],
 			},
 		],
 	},
